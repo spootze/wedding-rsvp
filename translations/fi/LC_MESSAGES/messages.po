@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-01 14:55+0300\n"
+"POT-Creation-Date: 2017-04-01 15:14+0300\n"
 "PO-Revision-Date: 2017-04-01 14:56+0300\n"
+"Last-Translator: \n"
 "Language: fi\n"
 "Language-Team: fi <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.0\n"
 
 #: templates/index.html:42
 msgid "Wedding"
@@ -30,3 +29,8 @@ msgstr "Eero & Pilvi 2017"
 #: templates/index.html:68
 msgid "Welcome!"
 msgstr "Tervetuloa mukaan!"
+
+#: templates/index.html:81
+msgid "Location"
+msgstr "Paikka"
+
