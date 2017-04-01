@@ -82,6 +82,10 @@
                 <span class="text-muted">Will Catch Your Eye</span>
             </h2>
             <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <div id="mapChurch" class="map"></div>
+            <div id="mapRestaurant" class="map"></div>
+
+
         </div>
 
         <hr class="featurette-divider">
@@ -108,23 +112,9 @@
 
         <hr class="featurette-divider">
 
-        <h3>My Google Maps Demo</h3>
-        <div id="map"></div>
-        <script>
-          function initMap() {
-            var uluru = {lat: -25.363, lng: 131.044};
-            var map = new google.maps.Map(document.getElementById('map'), {
-              zoom: 4,
-              center: uluru
-            });
-            var marker = new google.maps.Marker({
-              position: uluru,
-              map: map
-            });
-          }
-        </script>
+        <script src="static/js/draw_map.js"></script>
         <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key={{ config.GOOGLE_MAPS_API_KEY }}&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?key={{ config.GOOGLE_MAPS_API_KEY }}&callback=initMaps">
         </script>
 
 
