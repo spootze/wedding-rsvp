@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-01 15:52+0300\n"
+"POT-Creation-Date: 2017-04-01 16:30+0300\n"
 "PO-Revision-Date: 2017-04-01 14:56+0300\n"
 "Last-Translator: \n"
 "Language: fi\n"
@@ -22,6 +22,18 @@ msgstr ""
 msgid "Wedding"
 msgstr "Häät"
 
+#: templates/index.html:48 templates/index.html:81
+msgid "Location"
+msgstr "Paikka"
+
+#: templates/index.html:51 templates/index.html:92
+msgid "Program"
+msgstr "Ohjelma"
+
+#: templates/index.html:54 templates/index.html:103
+msgid "RSVP"
+msgstr "RSVP"
+
 #: templates/index.html:67
 msgid "Eero & Pilvi 2017"
 msgstr ""
@@ -29,14 +41,6 @@ msgstr ""
 #: templates/index.html:68
 msgid "Welcome!"
 msgstr "Tervetuloa mukaan!"
-
-#: templates/index.html:81
-msgid "Location"
-msgstr "Paikka"
-
-#: templates/index.html:92
-msgid "Program"
-msgstr "Ohjelma"
 
 #: templates/index.html:93
 msgid "Let's enjoy the evening in style"
@@ -46,10 +50,6 @@ msgstr "Nautitaan illasta tyylillä"
 msgid "Here's what we've planned for our special evening"
 msgstr "Alta löydät iltamme ohjelman"
 
-#: templates/index.html:103
-msgid "RSVP"
-msgstr "RSVP"
-
 #: templates/index.html:104
 msgid "So we know you're coming"
 msgstr "Niin tiedämme, että olet tulossa"
@@ -58,5 +58,7 @@ msgstr "Niin tiedämme, että olet tulossa"
 msgid ""
 "Fill the form below so we know that you're coming! Please let us know "
 "latest on Sunday 18.6."
-msgstr "Täytä alla oleva lomake, niin tiedämme, että olet tulossa. Palaathan meille viimeistään sunnuntaina 18.6."
+msgstr ""
+"Täytä alla oleva lomake, niin tiedämme, että olet tulossa. Palaathan "
+"meille viimeistään sunnuntaina 18.6."
 

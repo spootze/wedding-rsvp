@@ -45,13 +45,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#location">gettext('Location')</a>
+                        <a href="#location">{{ gettext('Location') }}</a>
                     </li>
                     <li>
-                        <a href="#program">gettext('Program')</a>
+                        <a href="#program">{{ gettext('Program') }}</a>
                     </li>
                     <li>
-                        <a href="#rsvp">gettext('RSVP')</a>
+                        <a href="#rsvp"> {{ gettext('RSVP') }}</a>
                     </li>
                 </ul>
             </div>
@@ -107,6 +107,26 @@
         </div>
 
         <hr class="featurette-divider">
+
+        <h3>My Google Maps Demo</h3>
+        <div id="map"></div>
+        <script>
+          function initMap() {
+            var uluru = {lat: -25.363, lng: 131.044};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: 4,
+              center: uluru
+            });
+            var marker = new google.maps.Marker({
+              position: uluru,
+              map: map
+            });
+          }
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{ config.GOOGLE_MAPS_API_KEY }}&callback=initMap">
+        </script>
+
 
         <!-- Footer -->
         <footer>
