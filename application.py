@@ -1,3 +1,5 @@
+from os import environ
+
 from flask import Flask
 from flask import render_template
 from flask.ext.babel import Babel
@@ -5,12 +7,19 @@ from flask import request, redirect, jsonify
 
 import json
 
-from database import init_db, db_session
+from database import Database
 from models import Registration
 
 application = Flask(__name__)
+
 application.config.from_object('config.BaseConfig')
-init_db()
+if 'RSVP_CONFIG' in environ:
+  application.config.from_envvar('RSVP_CONFIG')
+
+
+db = Database(application)
+db.init_db()
+
 babel = Babel(application)
 
 
@@ -31,8 +40,8 @@ def add_registration():
       request.form['email'],
       int(request.form['count'])
     )
-    db_session.add(r)
-    db_session.commit()
+    db.db_session.add(r)
+    db.db_session.commit()
     # TODO: localization
     return jsonify({
       'success':True,
@@ -50,7 +59,7 @@ def add_registration():
       message = """Unfortunately it seems that either the name or email has
                    already been used to RSVP"""
 
-    db_session.rollback()
+    db.db_session.rollback()
 
     return jsonify({
       'success':False,
