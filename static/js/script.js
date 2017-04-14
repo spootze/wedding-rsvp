@@ -6,15 +6,13 @@ var onDocReady = function(){
 
   var form = $('#rsvp-submit');
 
-
-
   form.submit(function(e){
 
       var data = {
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
         'count': $('input[name=count]').val(),
-        'requests': $('input[name=requests]').val()
+        'info': $('textarea[name=requests]').val()
       };
 
       $.ajax({
@@ -27,16 +25,13 @@ var onDocReady = function(){
         
         console.log(resp);
 
-        location.hash = '#';
-        window.scrollTo(0,0);
-
         if(resp.success){
-          $('.alert')
+          $('.rsvp-alert')
             .removeClass('alert-danger')
             .addClass('alert-success')
             .html(resp.message);
         } else if (!resp.success){
-          $('.alert')
+          $('.rsvp-alert')
             .removeClass('alert-success')
             .addClass('alert-danger')
             .html(resp.message);
@@ -50,6 +45,49 @@ var onDocReady = function(){
   });
 
 };
+
+var giftSubmits = $('.gift-register .btn');
+
+giftSubmits.click(function(e){
+
+  var giftId = $(this).data('gift-id');
+  var count = $('#gift-' + giftId + ' .slider-handle').attr('aria-valuenow')
+
+  console.log('Submitting #' + count + ' for gift id ' + giftId);
+
+  var data = {
+    'gift_id': giftId,
+    'count': count
+  };
+
+  $.ajax({
+    type: 'POST',
+    url: 'register_gift',
+    data: data,
+    dataType: 'json',
+    encode: true
+  }).done(function(resp){
+    
+    console.log(resp);
+
+    if(resp.success){
+      $('#alert-' + giftId)
+        .removeClass('alert-danger')
+        .addClass('alert-success')
+        .html(resp.message);
+    } else if (!resp.success){
+      $('#alert-' + giftId)
+        .removeClass('alert-success')
+        .addClass('alert-danger')
+        .html(resp.message);
+    }
+
+  });
+
+  e.preventDefault();
+  return false;
+
+});
 
 $(document).ready(onDocReady);
 
