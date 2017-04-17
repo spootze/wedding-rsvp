@@ -46,6 +46,9 @@ def register_gift():
     gift_id = request.form['gift_id']
     count = request.form['count']
 
+    if get_remaining_count(gift_id) < count:
+      raise Exception('Attempting to over-reserve gift.')
+
     gf = GiftRegistration(gift_id, count)
     db.db_session.add(gf)
     db.db_session.commit()
@@ -66,8 +69,7 @@ def register_gift():
     return jsonify({
       'success':False,
       'message': message,
-      'data': request.form,
-      'exception': str(e)
+      'data': request.form
     })
 
   return json.dumps(request.form)
@@ -109,8 +111,7 @@ def add_registration():
     return jsonify({
       'success':False,
       'message': message,
-      'data': request.form,
-      'exception': str(e)
+      'data': request.form
     })
 
   return json.dumps(request.form)
