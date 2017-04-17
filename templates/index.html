@@ -55,6 +55,9 @@
                     <li>
                         <a href="#rsvp"> {{ gettext('RSVP') }}</a>
                     </li>
+                    <li>
+                        <a href="#gift-register"> {{ gettext('Gift register') }}</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -112,22 +115,30 @@
             <div class="alert rsvp-alert"></div>
             <form id="rsvp-submit" action="rsvp" method="POST">
                     <div id="name-group" class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                        <label for="name">{{ gettext('Name') }}</label>
+                        <input type="text" class="form-control" name="name" placeholder="{{ gettext('Name') }}">
                     </div>
                     <div id="email-group" class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" placeholder="Email">
+                        <label for="email">{{ gettext('Email') }}</label>
+                        <input type="email" class="form-control" name="email" placeholder="{{ gettext('Email') }}">
                     </div>
                     <div id="count-group" class="form-group">
-                        <label for="count">Number of guests</label>
-                        <input type="number" class="form-control" name="count" placeholder="Number of guests">
+                        <label for="count">{{ gettext('Number of quests') }}</label>
+                        <input type="number" class="form-control" name="count" placeholder="{{ gettext('Number of guests') }}">
+                    </div>
+                    <div id="allergies-group" class="form-group">
+                        <label for="allergies">{{ gettext('Allergies') }}</label>
+                        <textarea name="allergies" class="form-control"></textarea>
+                    </div>
+                    <div id="program-requests-group" class="form-group">
+                        <label for="program-requests">{{ gettext('Program requests') }}</label>
+                        <textarea name="program-requests" class="form-control"></textarea>
                     </div>
                     <div id="requests-group" class="form-group">
-                        <label for="requests">Special requests</label>
+                        <label for="requests">{{ gettext('Other special requests') }}</label>
                         <textarea name="requests" class="form-control"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{ gettext('Register') }}</button>
                 </form>
         </div>
 
@@ -144,19 +155,11 @@
                         <td>
                             <a target="_blank" href="{{ gift.link }}">{{ gift.title }}</a>
                         </td>
-                        <td>
-                            <input
-                                type="text"
-                                name="count"
-                                data-provide="slider"
-                                data-slider-min="0"
-                                data-slider-max="{{ gift.remaining_count }}"
-                                data-slider-step="1"
-                                data-slider-value="0"
-                            >
+                        <td class="form-inline">
+                            <input type="number" class="form-control" name="count" min="0" max="{{remaining_counts[gift.id]}}"> <span class="space-left">/{{ remaining_counts[gift.id] }}</span>
                         </td>
                         <td>
-                            <button class="btn gift-submit" data-gift-id="{{ gift.id }}">Register</button>
+                            <button class="btn gift-submit" data-gift-id="{{ gift.id }}">{{ gettext('Register') }}</button>
                         </td>
                     </tr>
                     <div id="alert-{{ gift.id }}"" class="alert"></div>

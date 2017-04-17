@@ -2,7 +2,7 @@ from os import environ
 
 from flask import Flask
 from flask import render_template
-from flask.ext.babel import Babel
+from flask.ext.babel import Babel, gettext
 from flask import request, redirect, jsonify
 
 import json
@@ -31,7 +31,7 @@ def get_locale():
 
 @application.route('/')
 def index():
-    return render_template('index.html', gifts=get_gifts())
+    return render_template('index.html', gifts=Gift.query.all(), remaining_counts=get_remaining_counts())
 
 @application.route('/create_gift')
 def create_gift():
@@ -52,14 +52,14 @@ def register_gift():
 
     return jsonify({
       'success':True,
-      'message':'Thank you! Your gift reservation has been successfully recorded!',
+      'message':gettext('Thank you! Your gift reservation has been successfully recorded!'),
       'data': request.form  
     })
 
   except Exception as e:
     application.logger.error(e)
 
-    message = 'Unfortunately there was an error in processing your reservation'
+    message = gettext('Unfortunately there was an error in processing your reservation')
 
     db.db_session.rollback()
 
@@ -87,22 +87,20 @@ def add_registration():
     )
     db.db_session.add(r)
     db.db_session.commit()
-    # TODO: localization
     return jsonify({
       'success':True,
-      'message':'Thank you! Your RSVP has been successfully recorded!',
+      'message':gettext('Thank you! Your RSVP has been successfully recorded!'),
       'data': request.form  
     })
 
   except Exception as e:
     application.logger.error(e)
 
-    message = 'Unfortunately there was an error in processing your reservation'
+    message = gettext('Unfortunately there was an error in processing your reservation')
 
     if str(e).find('UNIQUE constraint failed') > -1 or str(e).find('value violates unique constraint') > -1:
-      # TODO: localization
-      message = """Unfortunately it seems that either the name or email has
-                   already been used to RSVP"""
+      message = gettext("""Unfortunately it seems that either the name or email has
+                   already been used to RSVP""")
 
 
 
@@ -117,22 +115,18 @@ def add_registration():
 
   return json.dumps(request.form)
 
-def get_registrations():
-  return Registration.query.all()
-
-# TODO: join giftregistration for already registered count
-def get_gifts():
+def get_remaining_counts():
   gifts = Gift.query.all()
+  remaining_counts = {}
   for gift in gifts:
-    registrations = db.db_session.query(func.sum(GiftRegistration.count)).filter(GiftRegistration.gift_id == gift.id).scalar()
-    gift.remaining_count = gift.initial_count
-    if registrations is not None:
-      gift.remaining_count -= registrations
+    remaining_counts[gift.id] = get_remaining_count(gift.id)
+  return remaining_counts
 
-  return gifts
-
-def get_gift(gift_id):
-  return db.db_session.query(Gift).get(gift_id)
+def get_remaining_count(gift_id):
+  initial_count = Gift.query.get(gift_id).initial_count
+  q = db.db_session.query(func.sum(GiftRegistration.count))
+  registrations = q.filter(GiftRegistration.gift_id == gift_id).scalar() or 0
+  return initial_count - registrations
 
 if __name__ == "__main__":
   application.debug = True

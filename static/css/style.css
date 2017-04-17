@@ -1,17 +1,4 @@
 
-.message{
-  display: none;
-  color: white;
-  text-align: center;
-  padding: .5em;
-}
-
-.message.success{
-  display: block;
-  background: green;
-}
-
-.message.failure{
-  display: block;
-  background: red;
+.space-left{
+	margin-left: .1em;
 }

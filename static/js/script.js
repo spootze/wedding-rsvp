@@ -51,7 +51,7 @@ var giftSubmits = $('.gift-register .btn');
 giftSubmits.click(function(e){
 
   var giftId = $(this).data('gift-id');
-  var count = $('#gift-' + giftId + ' .slider-handle').attr('aria-valuenow')
+  var count = $('#gift-' + giftId + ' input[name=count]').val()
 
   console.log('Submitting #' + count + ' for gift id ' + giftId);
 
