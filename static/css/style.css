@@ -1,4 +1,28 @@
 
+# Purple: #4a2b55
+
+
 .space-left{
 	margin-left: .1em;
+}
+
+.header-image{
+	background: #4a2b55
+}
+
+.map {
+    height: 400px;
+    width: 100%;
+}
+
+.maps-container{
+	margin-top: 1em;
+}
+
+.gift-register .alert{
+	display: none;
+}
+
+.gift-register .row{
+	margin-bottom: .5em;
 }

@@ -9,8 +9,9 @@ function initMapRestaurant(mapStyle) {
     
 
     var sipuli = {lat: 60.1688, lng: 24.9593577};
-    var map = new google.maps.Map(document.getElementById('mapChurch'), {
+    var map = new google.maps.Map(document.getElementById('mapRestaurant'), {
       zoom: 16,
+      scrollwheel:false,
       center: sipuli
     });
     var marker = new google.maps.Marker({
@@ -25,8 +26,9 @@ function initMapRestaurant(mapStyle) {
 function initMapChurch(mapStyle) {
     
     var church = {lat: 60.1730537, lng: 24.925083};
-    var map = new google.maps.Map(document.getElementById('mapRestaurant'), {
+    var map = new google.maps.Map(document.getElementById('mapChurch'), {
       zoom: 16,
+      scrollwheel:false,
       center: church
     });
     var marker = new google.maps.Marker({

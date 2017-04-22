@@ -27,9 +27,15 @@ babel = Babel(application)
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(['fi', 'en'])
+    url_lang_candidate = request.path[1:].split('/', 1)[0]
+    if url_lang_candidate in ['fi', 'en']:
+      return url_lang_candidate
+    else:
+      return request.accept_languages.best_match(['fi', 'en'])
 
 @application.route('/')
+@application.route('/fi')
+@application.route('/en')
 def index():
     return render_template('index.html', gifts=Gift.query.all(), remaining_counts=get_remaining_counts())
 

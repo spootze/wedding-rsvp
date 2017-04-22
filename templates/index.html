@@ -26,6 +26,8 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
 </head>
 
 <body>
@@ -59,6 +61,10 @@
                         <a href="#gift-register"> {{ gettext('Gift register') }}</a>
                     </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/fi">{{gettext('Suomeksi')}}</a></li>
+                    <li><a href="/en">{{gettext('English')}}</a></li>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -82,17 +88,25 @@
 
         <!-- First Featurette -->
         <div class="featurette" id="location">
-            <img class="featurette-image img-circle img-responsive pull-right" src="http://placehold.it/500x500">
+            <img class="featurette-image img-circle img-responsive pull-right" src="static/img/church.jpg">
             <h2 class="featurette-heading">{{ gettext('Location') }}
-                <span class="text-muted">Will Catch Your Eye</span>
             </h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            <div id="mapChurch" class="map"></div>
-            <div id="mapRestaurant" class="map"></div>
-
-
+            <p class="lead">{{gettext('The wedding ceremony will take place in the Temppeliaukio Church at Lutherinkatu 3. The reception is held at Restaurant Sipuli at Kanavanranta 7.')}}</p>
+            <p class="lead">{{gettext('Shared transportation from the church to the reception has been arranged. You are very welcome to join us with a car. Please note however, that there are limited parking opportunities at the restaurant available.')}}</p>
+            
         </div>
-
+        <div class="container maps-container">
+            <div class="maps row">
+                <div class="col-sm-6">
+                    <h2>{{gettext('Temppeliaukio Church')}}</h2>
+                    <div id="mapChurch" class="map"></div>
+                </div>
+                <div class="col-sm-6">
+                    <h2>{{gettext('Restaurant Sipuli')}}</h2>
+                    <div id="mapRestaurant" class="map"></div>
+                </div>
+            </div>    
+        </div>
         <hr class="featurette-divider">
 
         <!-- Second Featurette -->
@@ -112,6 +126,13 @@
                 <span class="text-muted"> {{ gettext('So we know you\'re coming') }}</span>
             </h2>
             <p class="lead">{{ gettext('Fill the form below so we know that you\'re coming! Please let us know latest on Sunday 18.6.') }}</p>
+            <p>{{gettext('Please additionally indicate any allergies or special diets or any additional special requests you might have. In case you would like hold a speech or some other number, you can specify that below or by contacting the best man or maid of honor.')}}</p>
+            <dl class="dl-horizontal">
+                <dt>{{gettext('Best man')}}</dt>
+                <dd>Olli Niskanen +358 40 575 9847</dd>
+                <dt>{{gettext('Maid of Honor')}}</dt>
+                <dd>Maija Joki-Korpela +358 44 572 4229</dd>
+            </dl>
             <div class="alert rsvp-alert"></div>
             <form id="rsvp-submit" action="rsvp" method="POST">
                     <div id="name-group" class="form-group">
@@ -144,27 +165,31 @@
 
         <div class="featurette" id="gift-register">
             <h2 class="featurette-heading"> {{ gettext('Gift Register') }}
-                <span class="text-muted"> {{ gettext('So we know you\'re coming') }}</span>
             </h2>
-            <p class="lead">...</p>
+            <p class="lead">{{gettext('If you\'d like, you are welcome to help us grow our honeymoon piggybank at FI67 5800 1320 2839 54 or to register a gift below.')}}</p>
             <div class="alert"></div>
             
-            <table class="table gift-register">
+            <div class="container gift-register">
+                    <div class="row">
+                        <div class="col-xs-7"><b>{{gettext('Item')}}</b></div>
+                        <div class="col-xs-3"><b>{{gettext('Quantity')}}</b></div>
+                        <div class="col-xs-2"></div>
+                    </div>
                 {% for gift in gifts %}
-                    <tr id="gift-{{ gift.id }}">
-                        <td>
+                    <div class="row" id="gift-{{ gift.id }}">
+                        <div class="col-xs-8">
                             <a target="_blank" href="{{ gift.link }}">{{ gift.title }}</a>
-                        </td>
-                        <td class="form-inline">
+                        </div>
+                        <div class="col-xs-2 form-inline">
                             <input type="number" class="form-control" name="count" min="0" max="{{remaining_counts[gift.id]}}"> <span class="space-left">/{{ remaining_counts[gift.id] }}</span>
-                        </td>
-                        <td>
+                        </div>
+                        <div class="col-xs-2">
                             <button class="btn gift-submit" data-gift-id="{{ gift.id }}">{{ gettext('Register') }}</button>
-                        </td>
-                    </tr>
+                        </div>
+                    </div>
                     <div id="alert-{{ gift.id }}"" class="alert"></div>
                 {% endfor %}
-            </table>
+            </div>
 
         </div>
 
