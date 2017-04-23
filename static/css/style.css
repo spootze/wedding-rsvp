@@ -26,3 +26,8 @@
 .gift-register .row{
 	margin-bottom: .5em;
 }
+
+.featurette {
+	padding-top:50px;
+	margin-top:-50px;
+}
