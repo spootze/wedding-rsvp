@@ -11,8 +11,10 @@ var onDocReady = function(){
       var data = {
         'name': $('input[name=name]').val(),
         'email': $('input[name=email]').val(),
-        'count': $('input[name=count]').val(),
-        'info': $('textarea[name=requests]').val()
+        'allergies': $('textarea[name=allergies]').val(),
+        'program_requests': $('textarea[name=program-requests]').val(),
+        'info': $('textarea[name=requests]').val(),
+        'count': $('input[name=count]').val()
       };
 
       $.ajax({
@@ -74,12 +76,14 @@ giftSubmits.click(function(e){
       $('#alert-' + giftId)
         .removeClass('alert-danger')
         .addClass('alert-success')
-        .html(resp.message);
+        .html(resp.message)
+        .show();
     } else if (!resp.success){
       $('#alert-' + giftId)
         .removeClass('alert-success')
         .addClass('alert-danger')
-        .html(resp.message);
+        .html(resp.message)
+        .show();
     }
 
   });

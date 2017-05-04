@@ -52,9 +52,6 @@
                         <a href="#location">{{ gettext('Location') }}</a>
                     </li>
                     <li>
-                        <a href="#program">{{ gettext('Program') }}</a>
-                    </li>
-                    <li>
                         <a href="#rsvp"> {{ gettext('RSVP') }}</a>
                     </li>
                     <li>
@@ -91,7 +88,7 @@
             <img class="featurette-image img-circle img-responsive pull-right" src="static/img/church.jpg">
             <h2 class="featurette-heading">{{ gettext('Location') }}
             </h2>
-            <p class="lead">{{gettext('The wedding ceremony will take place in the Temppeliaukio Church at Lutherinkatu 3. The reception is held at Restaurant Sipuli at Kanavanranta 7.')}}</p>
+            <p class="lead">{{gettext('The wedding ceremony will take place at Temppeliaukio Church in Helsinki, at address Lutherinkatu 3. The wedding reception is held at Restaurant Sipuli in Helsinki, at address Kanavaranta 7.')}}</p>
             <p class="lead">{{gettext('Shared transportation from the church to the reception has been arranged. You are very welcome to join us with a car. Please note however, that there are limited parking opportunities at the restaurant available.')}}</p>
             
         </div>
@@ -109,24 +106,14 @@
         </div>
         <hr class="featurette-divider">
 
-        <!-- Second Featurette -->
-        <div class="featurette" id="program">
-            <img class="featurette-image img-circle img-responsive pull-left" src="http://placehold.it/500x500">
-            <h2 class="featurette-heading">{{ gettext('Program') }}
-                <span class="text-muted">{{ gettext('Let\'s enjoy the evening in style') }} </span>
-            </h2>
-            <p class="lead">{{ gettext('Here\'s what we\'ve planned for our special evening') }}</p>
-        </div>
-
         <hr class="featurette-divider">
 
         <!-- Third Featurette -->
         <div class="featurette" id="rsvp">
             <h2 class="featurette-heading"> {{ gettext('RSVP') }}
-                <span class="text-muted"> {{ gettext('So we know you\'re coming') }}</span>
             </h2>
             <p class="lead">{{ gettext('Fill the form below so we know that you\'re coming! Please let us know latest on Sunday 18.6.') }}</p>
-            <p>{{gettext('Please additionally indicate any allergies or special diets or any additional special requests you might have. In case you would like hold a speech or some other number, you can specify that below or by contacting the best man or maid of honor.')}}</p>
+            <p>{{gettext('Please additionally indicate any allergies or special diets or any additional special requests you might have. If you wish to give a speech or a performance at the wedding, you can specify that below or by being in contact with the bestman or the maid of honor.')}}</p>
             <dl class="dl-horizontal">
                 <dt>{{gettext('Best man')}}</dt>
                 <dd>Olli Niskanen +358 40 575 9847</dd>
@@ -166,7 +153,7 @@
         <div class="featurette" id="gift-register">
             <h2 class="featurette-heading"> {{ gettext('Gift Register') }}
             </h2>
-            <p class="lead">{{gettext('If you\'d like, you are welcome to help us grow our honeymoon piggybank at FI67 5800 1320 2839 54 or to register a gift below.')}}</p>
+            <p class="lead">{{gettext('If you wish to give a wedding gift, you can help fund our honeymoon at FI67 5800 1320 2839 54. Additionally, we have compiled a gift list, which you can find below')}}</p>
             <div class="alert"></div>
             
             <div class="container gift-register">
@@ -178,7 +165,13 @@
                 {% for gift in gifts %}
                     <div class="row" id="gift-{{ gift.id }}">
                         <div class="col-xs-8">
-                            <a target="_blank" href="{{ gift.link }}">{{ gift.title }}</a>
+                            {% if gift.link is not none %}
+                            <a target="_blank" href="{{ gift.link }}">
+                            {% endif %}
+                            {{ gift.title }}
+                            {% if gift.link is not none %}
+                            </a>
+                            {% endif %}
                         </div>
                         <div class="col-xs-2 form-inline">
                             <input type="number" class="form-control" name="count" min="0" max="{{remaining_counts[gift.id]}}"> <span class="space-left">/{{ remaining_counts[gift.id] }}</span>

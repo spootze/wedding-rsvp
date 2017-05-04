@@ -39,20 +39,18 @@ def get_locale():
 def index():
     return render_template('index.html', gifts=Gift.query.all(), remaining_counts=get_remaining_counts())
 
-@application.route('/create_gift')
-def create_gift():
-    g = Gift('Megapaavo', 'https://www.paavovayrynen.fi/', 50)
-    db.db_session.add(g)
-    db.db_session.commit()
-
 @application.route('/register_gift', methods=['POST'])
 def register_gift():
 
   try:
     gift_id = request.form['gift_id']
-    count = request.form['count']
+    count = int(request.form['count'])
 
-    if get_remaining_count(gift_id) < count:
+    print get_remaining_count(gift_id)
+    print count
+    print count + 1
+
+    if count > get_remaining_count(gift_id):
       raise Exception('Attempting to over-reserve gift.')
 
     gf = GiftRegistration(gift_id, count)
@@ -90,8 +88,10 @@ def add_registration():
     r = Registration(
       request.form['name'],
       request.form['email'],
-      int(request.form['count']),
-      request.form['info']
+      request.form['allergies'],
+      request.form['program_requests'],
+      request.form['info'],
+      int(request.form['count'])
     )
     db.db_session.add(r)
     db.db_session.commit()
