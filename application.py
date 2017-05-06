@@ -37,7 +37,7 @@ def get_locale():
 @application.route('/fi')
 @application.route('/en')
 def index():
-    return render_template('index.html', gifts=Gift.query.all(), remaining_counts=get_remaining_counts())
+    return render_template('index.html', gifts=Gift.query.order_by(Gift.id).all(), remaining_counts=get_remaining_counts())
 
 @application.route('/register_gift', methods=['POST'])
 def register_gift():

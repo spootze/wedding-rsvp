@@ -1,6 +1,10 @@
+body {
+ font-family: 'Open Sans', sans-serif !important;
+}
 
-# Purple: #4a2b55
-
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poiret One', cursive;
+}
 
 .space-left{
 	margin-left: .1em;

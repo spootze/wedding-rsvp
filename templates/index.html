@@ -11,6 +11,8 @@
 
     <title>Eero & Pilvi 2017</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Poiret+One" rel="stylesheet">
+
     <!-- Bootstrap Core CSS -->
     <link href="static/css/bootstrap.min.css" rel="stylesheet">
 
@@ -89,7 +91,7 @@
             <h2 class="featurette-heading">{{ gettext('Location') }}
             </h2>
             <p class="lead">{{gettext('The wedding ceremony will take place at Temppeliaukio Church in Helsinki, at address Lutherinkatu 3. The wedding reception is held at Restaurant Sipuli in Helsinki, at address Kanavaranta 7.')}}</p>
-            <p class="lead">{{gettext('Shared transportation from the church to the reception has been arranged. You are very welcome to join us with a car. Please note however, that there are limited parking opportunities at the restaurant available.')}}</p>
+            <p class="lead">{{gettext('Shared transportation from the church to the reception has been arranged. You are welcome to join us with a car. Please note however, that there are limited parking opportunities at the restaurant available.')}}</p>
             
         </div>
         <div class="container maps-container">
@@ -104,7 +106,6 @@
                 </div>
             </div>    
         </div>
-        <hr class="featurette-divider">
 
         <hr class="featurette-divider">
 
@@ -120,26 +121,27 @@
                 <dt>{{gettext('Maid of Honor')}}</dt>
                 <dd>Maija Joki-Korpela +358 44 572 4229</dd>
             </dl>
+            <p>* {{gettext('Required field')}}</p>
             <div class="alert rsvp-alert"></div>
             <form id="rsvp-submit" action="rsvp" method="POST">
                     <div id="name-group" class="form-group">
-                        <label for="name">{{ gettext('Name') }}</label>
-                        <input type="text" class="form-control" name="name" placeholder="{{ gettext('Name') }}">
+                        <label for="name">{{ gettext('Name') }} *</label>
+                        <input type="text" class="form-control" name="name" placeholder="{{ gettext('Name') }}" required="true">
                     </div>
                     <div id="email-group" class="form-group">
-                        <label for="email">{{ gettext('Email') }}</label>
-                        <input type="email" class="form-control" name="email" placeholder="{{ gettext('Email') }}">
+                        <label for="email">{{ gettext('Email') }} *</label>
+                        <input type="email" class="form-control" name="email" placeholder="{{ gettext('Email') }}" required="true">
                     </div>
                     <div id="count-group" class="form-group">
-                        <label for="count">{{ gettext('Number of quests') }}</label>
-                        <input type="number" class="form-control" name="count" placeholder="{{ gettext('Number of guests') }}">
+                        <label for="count">{{ gettext('Number of quests') }} *</label>
+                        <input type="number" class="form-control" name="count" placeholder="{{ gettext('Number of guests') }}" required="true">
                     </div>
                     <div id="allergies-group" class="form-group">
-                        <label for="allergies">{{ gettext('Allergies') }}</label>
+                        <label for="allergies">{{ gettext('Dietary restrictions') }}</label>
                         <textarea name="allergies" class="form-control"></textarea>
                     </div>
                     <div id="program-requests-group" class="form-group">
-                        <label for="program-requests">{{ gettext('Program requests') }}</label>
+                        <label for="program-requests">{{ gettext('Request for a program slot') }}</label>
                         <textarea name="program-requests" class="form-control"></textarea>
                     </div>
                     <div id="requests-group" class="form-group">
@@ -153,7 +155,7 @@
         <div class="featurette" id="gift-register">
             <h2 class="featurette-heading"> {{ gettext('Gift Register') }}
             </h2>
-            <p class="lead">{{gettext('If you wish to give a wedding gift, you can help fund our honeymoon at FI67 5800 1320 2839 54. Additionally, we have compiled a gift list, which you can find below')}}</p>
+            <p class="lead">{{gettext('If you wish to give a wedding gift, you can help fund our honeymoon at FI67 5800 1320 2839 54. Additionally, we have compiled a gift list, which you can find below.')}}</p>
             <div class="alert"></div>
             
             <div class="container gift-register">
@@ -164,16 +166,16 @@
                     </div>
                 {% for gift in gifts %}
                     <div class="row" id="gift-{{ gift.id }}">
-                        <div class="col-xs-8">
+                        <div class="col-xs-7">
                             {% if gift.link is not none %}
                             <a target="_blank" href="{{ gift.link }}">
                             {% endif %}
-                            {{ gift.title }}
+                            {{ gift.title | safe}}
                             {% if gift.link is not none %}
                             </a>
                             {% endif %}
                         </div>
-                        <div class="col-xs-2 form-inline">
+                        <div class="col-xs-3 form-inline">
                             <input type="number" class="form-control" name="count" min="0" max="{{remaining_counts[gift.id]}}"> <span class="space-left">/{{ remaining_counts[gift.id] }}</span>
                         </div>
                         <div class="col-xs-2">
